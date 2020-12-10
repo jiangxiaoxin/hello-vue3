@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>About</h1>
-    <button @click="addLog">add</button>
+    <el-button type="primary" @click="addLog">add</el-button>
     <MyList :list="list" :title="title">
       <template v-slot:header="headerSlotProps">
         <h2 class="custom-title">{{ headerSlotProps.title }}</h2>
