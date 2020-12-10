@@ -2,6 +2,8 @@
 
 ref 可以将 Number，String 这种基础类型的数据，直接转成响应式的数据。
 
+原来给组件和元素绑的 ref 也变了。
+
 ### toRefs
 
 在创建了响应式数据之后，有很多地方会想写成下面的解构形式，添加其他的功能, 但是解构之后原来的响应式数据将不再是相应式的了。
@@ -72,4 +74,20 @@ app.config.globalProperties.$someFn = () => {}
 
 ### slots
 
-v-slot
+v-slot 将显示内容绑定到特定的命名 slot 上。
+
+### provide 和 inject
+
+从父组件往子组件传递参数一般通过 props , 但如果想传递的路径过深，通过 props 就只能一级一级的传递下去，对应这种情况，就是在父组件里提供 provide， 在子组件里使用 inject 获取这部分数据即可。也可以通过 vuex 的 store 来传递，但这更像是访问一个数据，而不是传递一个数据。
+
+provide/inject 的数据默认不是响应式的，通过 ref 和 reactive 将其变成可响应式的。
+
+### Suspense ？
+
+### defineAsyncComponent 
+
+异步组件，跟异步路由不是一回事。
+
+### teleport 
+
+有啥使用的场景？
