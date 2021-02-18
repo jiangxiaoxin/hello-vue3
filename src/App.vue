@@ -1,6 +1,6 @@
 <template>
   <router-view></router-view>
-  <Counter msg="从父组件往子组件传个数据" />
+  <Counter msg="从父组件往子组件传个数据" @custom-event="receiveCustomEvent" />
   <HelloWorld :msg="count" />
   <div>rootCount: {{rootCount}}</div>
   <div>
@@ -82,6 +82,9 @@ export default {
     },
     insertTime() {
       this.$store.commit('moduleA/insertTime', { time: new Date()})
+    },
+    receiveCustomEvent(data) {
+      console.log('==receive custom event==', data);
     }
   },
   computed: {

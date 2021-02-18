@@ -10,6 +10,9 @@
       <button @click="plus">+10</button>
       <button @click="minus">-1</button>
     </div>
+    <div>
+      <button @click="customEvent">自定义事件</button>
+    </div>
   </div>
 </template>
 
@@ -21,6 +24,12 @@ export default {
     msg: {
       type: String,
       default: ""
+    }
+  },
+  data() {
+    return {
+      localMsg: this.msg,
+      other: 111
     }
   },
   setup() {
@@ -57,11 +66,16 @@ export default {
     }
   },
   beforeCreate() {
-    console.log('counter before create');
+    console.log('$$counter before create', this.msg, this.localMsg, this.other);
   },
   created() {
-    console.log('counter created');
+    console.log('$$counter created', this.msg, this.localMsg, this.other);
   },
+  // watch: {
+  //   localMsg: function(val1, val2) {
+  //     console.log('=== local', val1, val2);
+  //   }
+  // },
   methods: {
     plus() {
       this.count += 10;
@@ -69,6 +83,9 @@ export default {
     },
     minus() {
       this.anotherCount -= 1;
+    },
+    customEvent() {
+      this.$emit('custom-event', 'a custom event');
     }
   }
 }
