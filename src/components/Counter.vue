@@ -1,6 +1,9 @@
 <template>
   <div class="counter">
     <h1>counter: {{ msg }}</h1>
+    <div v-if="countGT10">
+      count >= 10
+    </div>
     <p>count value: {{ count }}</p>
     <p>clicked: {{ log.clicked }}</p>
     <p>copy: {{ copy.clicked }}</p>
@@ -8,6 +11,7 @@
     <p>minus count: {{ anotherCount }}</p>
     <div>
       <button @click="plus">+10</button>
+      <button @click="minus10">-10</button>
       <button @click="minus">-1</button>
     </div>
     <div>
@@ -39,6 +43,19 @@ export default {
     const log = reactive({
       clicked: 0
     });
+    watch(count, (newValue, oldValue) => {
+      console.log('--> 监听到count变了', count.value, newValue, oldValue);
+    });
+    watch(count, (newValue, oldValue) => {
+      console.log('--> 这里也监听到count变了', count.value, newValue, oldValue);
+    })
+    const countGT10 = computed(() => {
+      if (count.value >= 10) {
+        return true;
+      } else {
+        return false;
+      }
+    })
     watchEffect(() => {
       console.log('watch effect:\n');
       // console.log('count:', count.value);
@@ -62,7 +79,8 @@ export default {
       log,
       copy,
       plusOne,
-      anotherCount
+      anotherCount, 
+      countGT10
     }
   },
   beforeCreate() {
@@ -80,6 +98,9 @@ export default {
     plus() {
       this.count += 10;
       this.log.clicked += 1;
+    },
+    minus10() {
+      this.count -= 10;
     },
     minus() {
       this.anotherCount -= 1;
